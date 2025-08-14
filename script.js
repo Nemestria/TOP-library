@@ -1,9 +1,13 @@
 // Array para almacenar los libros
 const myLibrary = [];
 
-// Elemento HTML donde se pintan
+// Declaracion variables y selectores
 const libraryEl = document.querySelector('#library');
+const form = document.querySelector('#bookForm');
 
+
+
+// Objetos
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -53,3 +57,21 @@ function displayLibrary() {
     libraryEl.appendChild(card);
   });
 }
+
+
+//prevenimos que pulsar en el formulario recargue la web
+form.addEventListener('submit', (e) =>{
+  e.preventDefault();
+  console.log("Formulario enviado sin recargar")
+
+  const title = form.title.value;
+  const author = form.author.value;
+  const pages = Number(form.pages.value);
+  const read = form.read.checked;
+
+  addBookToLibrary(title, author, pages, read);
+  displayLibrary();
+  form.reset();
+  
+  console.log({title, author, pages, read});
+});

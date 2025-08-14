@@ -11,6 +11,27 @@
     </header>
 
     <main>
+        <form id="bookForm" autocomplete="off">
+            <label>
+                Title
+                <input name="title" required>
+            </label>
+            <label>
+                Author
+                <input name="author" required>
+            </label>
+            <label>
+                Pages
+                <input name="pages" type="number" min="1" required>
+            </label>
+            <label>
+                Read
+                <input name="read" type="checkbox">
+            </label>
+
+            <button type="submit">Add Book</button>
+        </form>
+        
         <section id="library">
             <!-- aquí los libros -->
         </section>
