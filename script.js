@@ -47,6 +47,23 @@ function makeBookCard(book) {
   card.appendChild(pPages);
   card.appendChild(pRead);
 
+
+  //declaramos variables creandolas dentro de la creación de la Card
+  const btnRemove = document.createElement('button');
+  btnRemove.textContent = 'Remove';
+  btnRemove.classList.add('btn-remove');
+
+  const btnToggle = document.createElement('button');
+  btnToggle.textContent = book.read ? 'Mark as unread' : 'Mark as read';
+  btnToggle.classList.add('btn-toggle');
+
+  card.appendChild(btnRemove);
+  card.appendChild(btnToggle);
+
+  if (book.read) {
+    card.classList.add('is-read');
+  }
+
   return card;
 }
 
@@ -58,16 +75,51 @@ function displayLibrary() {
   });
 }
 
+Book.prototype.toggleRead = function () {
+  this.read = !this.read;
+};
+
+libraryEl.addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+
+  const card = e.target.closest('.book-card');
+  const id = card?.dataset.id;
+  if (!id) return;
+
+  const idx = myLibrary.findIndex(b => b.id === id);
+  if (idx === -1) return;
+
+  if (btn.classList.contains('btn-remove')) {
+    myLibrary.splice(idx, 1);
+    displayLibrary();
+  }
+
+  if (btn.classList.contains('btn-toggle')){
+    myLibrary[idx].toggleRead();
+    displayLibrary();
+  }
+});
 
 //prevenimos que pulsar en el formulario recargue la web
 form.addEventListener('submit', (e) =>{
   e.preventDefault();
   console.log("Formulario enviado sin recargar")
 
-  const title = form.title.value;
-  const author = form.author.value;
+  const title = form.title.value.trim();
+  const author = form.author.value.trim();
   const pages = Number(form.pages.value);
   const read = form.read.checked;
+
+  //checks
+  if (!title || !author){
+    alert("Title and Author are required");
+    return;
+  }
+  if (!Number.isInteger(pages) || pages <= 0){
+    alert("Pages must be positive.");
+    return
+  }
 
   addBookToLibrary(title, author, pages, read);
   displayLibrary();

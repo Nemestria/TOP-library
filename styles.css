@@ -1,0 +1,104 @@
+
+
+
+
+
+
+
+
+
+
+
+/* book card */
+
+.book-card {
+  display: flex;
+  cursor: pointer;
+  width: 500px;
+  height: auto;
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  border: 3px solid #fff;
+  outline: 3px solid #000;
+  box-shadow: 6px 6px 0 #00a4ef;
+  transition: all 0.1s ease-out;
+  padding: 15px;
+  margin: 1rem;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+@keyframes slide {
+    0%{
+        left: -100%;
+    }
+    100%{
+        left: 100%;
+    }
+}
+
+.book-card::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.8),
+        transparent
+    );
+    z-index: 1;
+    transition: none;
+    /* Initially hide the pseudo-element */
+    opacity: 0;
+}
+
+.book-card:hover::before {
+    opacity: 1;
+    animation: slide 2s infinite;
+}
+
+.book-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0 #000;
+    background-color: #000;
+    color: #fff;
+}
+
+.book-card:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0 #00a4ef;
+    background-color: #fff;
+    color: #000;
+    border-color: #000;
+}
+
+.book-card.is-read {
+  border-color: #4caf50;           /* borde verdoso */
+  background: #f4fff4;
+  color: #000;             /* fondo suave */
+}
+
+.actions { display: flex; gap: 8px; margin-top: 8px; }
+
+.btn-toggle, .btn-remove {
+  padding: 6px 10px;
+  margin: 0.1rem 0.25rem;
+  border: 3px solid #fff;
+  outline: 3px solid #000;
+  box-shadow: 6px 6px 0 #00a4ef;
+  cursor: pointer;
+}
+
+.btn-toggle { border-color: #4caf50; }
+.btn-remove { border-color: #e53935; }
