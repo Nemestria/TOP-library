@@ -1,17 +1,21 @@
+body{
+    background-color: #39393a;
+    font-family: Arial, Helvetica, sans-serif;
+    color:  #fff;
+}
 
+header{ margin: 1rem;}
 
-
-
-
-
-
-
+#bookForm{
+    font-size: x-large;
+    
+}
 
 
 
 /* book card */
 
-.book-card {
+.book-card, #bookForm {
   display: flex;
   cursor: pointer;
   width: 500px;
@@ -54,7 +58,7 @@
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0.1),
         transparent
     );
     z-index: 1;
